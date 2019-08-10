@@ -25,7 +25,7 @@
 		<property name="show_sql">true</property>
 
 		<!-- Eliminar e recriar o esquema do banco de dados na inicialização -->
-		<property name="hbm2ddl.auto">update</property>
+		<property name="hbm2ddl.auto">validate</property>
 
 		<mapping class="br.com.vendas.doumain.Fornecedor" />
 		<mapping class="br.com.vendas.doumain.Funcionario" />

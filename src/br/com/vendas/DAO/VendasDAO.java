@@ -7,11 +7,11 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import br.com.vendas.doumain.Fornecedor;
+import br.com.vendas.doumain.Vendas;
 import br.com.vendas.util.HibernateUtil;
 
-public class FornecedoresDAO {
-
-	public void salvar(Fornecedor fornecedor) {
+public class VendasDAO {
+	public void salvar(Vendas venda) {
 		//criando a conexao
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		System.out.println("criou a conexao");
@@ -20,7 +20,7 @@ public class FornecedoresDAO {
 		
 		try {
 			transaction = session.beginTransaction();//abrindo a transaçao			
-			session.save(fornecedor);
+			session.save(venda);
 			transaction.commit();//confirmando a transaçao
 			System.out.println("salvo com sucesso");
 			
@@ -36,16 +36,16 @@ public class FornecedoresDAO {
 		
 	}
 	@SuppressWarnings("unchecked")
-	public List<Fornecedor>listar(){
+	public List<Vendas>listar(){
 		//criando a conexao
 				Session sessao = HibernateUtil.getSessionFactory().openSession();
 				System.out.println("criou a conexao");
 				
-				List<Fornecedor>fornecedores=null;
+				List<Vendas>vendas=null;
 				
 				try {
-					Query	consulta = 	sessao.getNamedQuery("Fornecedor.listar");
-					fornecedores = consulta.list();
+					Query	consulta = 	sessao.getNamedQuery("Vendas.listar");
+					vendas = consulta.list();
 					System.out.println("listado com sucesso");
 					
 				} catch (RuntimeException e) {						
@@ -55,20 +55,19 @@ public class FornecedoresDAO {
 				finally {
 					sessao.close();
 				}
-				return fornecedores;
+				return vendas;
 	}
-	
-	public Fornecedor buscarPorCodigo(Long codigo_for){
+	public Vendas buscarPorCodigo(Long codigo_ven){
 		//criando a conexao
 				Session sessao = HibernateUtil.getSessionFactory().openSession();
 				System.out.println("criou a conexao");
 				
-				Fornecedor fornecedor = null;
+				Vendas venda = null;
 				
 				try {
-					Query	consulta = 	sessao.getNamedQuery("Fornecedor.buscarPorCodigo");
-					consulta.setLong("codigo_for", codigo_for);
-					fornecedor = (Fornecedor) consulta.uniqueResult();
+					Query	consulta = 	sessao.getNamedQuery("Vendas.buscarPorCodigo");
+					consulta.setLong("codigo_ven", codigo_ven);
+					venda = (Vendas) consulta.uniqueResult();
 					System.out.println("buscado com sucesso");
 					
 				} catch (RuntimeException e) {						
@@ -78,10 +77,9 @@ public class FornecedoresDAO {
 				finally {
 					sessao.close();
 				}
-				return fornecedor;
+				return venda;
 	}
-	
-	public void excluir(Fornecedor fornecedor) {
+	public void excluir(Vendas venda) {
 		//criando a conexao
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		System.out.println("criou a conexao");
@@ -90,7 +88,7 @@ public class FornecedoresDAO {
 		
 		try {
 			transaction = session.beginTransaction();//abrindo a transaçao			
-			session.delete(fornecedor);
+			session.delete(venda);
 			transaction.commit();//confirmando a transaçao
 			System.out.println("deletado com sucesso");
 			
@@ -105,7 +103,6 @@ public class FornecedoresDAO {
 		}
 		
 	}
-	
 	public void excluir(Long codigo) {
 		//criando a conexao
 		Session session = HibernateUtil.getSessionFactory().openSession();
@@ -115,8 +112,8 @@ public class FornecedoresDAO {
 		
 		try {
 			transaction = session.beginTransaction();//abrindo a transaçao			
-			Fornecedor fornecedor = buscarPorCodigo(codigo);
-			session.delete(fornecedor);
+			Vendas venda = buscarPorCodigo(codigo);
+			session.delete(venda);
 			transaction.commit();//confirmando a transaçao
 			System.out.println("deletado com sucesso");
 			
@@ -129,10 +126,8 @@ public class FornecedoresDAO {
 		finally {
 			session.close();
 		}
-		
 	}
-	
-	public void editar(Fornecedor fornecedor) {
+	public void editar1(Vendas venda) {
 		//criando a conexao
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		System.out.println("criou a conexao");
@@ -141,9 +136,7 @@ public class FornecedoresDAO {
 		
 		try {
 			transaction = session.beginTransaction();//abrindo a transaçao			
-			Fornecedor fornecedorEditar = buscarPorCodigo(fornecedor.getCodigo_for());
-			fornecedorEditar.setDescricao_for(fornecedor.getDescricao_for());
-			session.update(fornecedorEditar);
+			session.update(venda);
 			transaction.commit();//confirmando a transaçao
 			System.out.println("editado com sucesso");
 			
@@ -158,33 +151,4 @@ public class FornecedoresDAO {
 		}
 		
 	}
-	
-	public void editar1(Fornecedor fornecedor) {
-		//criando a conexao
-		Session session = HibernateUtil.getSessionFactory().openSession();
-		System.out.println("criou a conexao");
-		
-		Transaction transaction = null;
-		
-		try {
-			transaction = session.beginTransaction();//abrindo a transaçao			
-			session.update(fornecedor);
-			transaction.commit();//confirmando a transaçao
-			System.out.println("editado com sucesso");
-			
-		} catch (RuntimeException e) {
-			if(transaction != null) {
-				transaction.rollback();				
-			}	
-			System.out.println("erro ao editar "+e.getMessage());			
-		}
-		finally {
-			session.close();
-		}
-		
-	}
-	
-	
-	
-	
 }
