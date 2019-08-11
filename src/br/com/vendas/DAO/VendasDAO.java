@@ -5,11 +5,8 @@ import java.util.List;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-
-import br.com.vendas.doumain.Fornecedor;
 import br.com.vendas.doumain.Vendas;
 import br.com.vendas.util.HibernateUtil;
-
 public class VendasDAO {
 	public void salvar(Vendas venda) {
 		//criando a conexao

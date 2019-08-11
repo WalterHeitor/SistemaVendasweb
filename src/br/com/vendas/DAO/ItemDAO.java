@@ -1,23 +1,27 @@
 package br.com.vendas.DAO;
 
 import java.util.List;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import br.com.vendas.doumain.Funcionario;
+import br.com.vendas.doumain.Item;
 import br.com.vendas.util.HibernateUtil;
 
-public class FuncionarioDao {
-	public void salvar(Funcionario funcionario) {
+public class ItemDAO {
+	public void salvar(Item item) {
 		//criando a conexao
 		Session session = HibernateUtil.getSessionFactory().openSession();
-		System.out.println("criou a conexao");		
-		Transaction transaction = null;		
+		System.out.println("criou a conexao");
+		
+		Transaction transaction = null;
+		
 		try {
 			transaction = session.beginTransaction();//abrindo a transaçao			
-			session.save(funcionario);
+			session.save(item);
 			transaction.commit();//confirmando a transaçao
-			System.out.println("salvo com sucesso");			
+			System.out.println("salvo com sucesso");
+			
 		} catch (RuntimeException e) {
 			if(transaction != null) {
 				transaction.rollback();				
@@ -26,19 +30,22 @@ public class FuncionarioDao {
 		}
 		finally {
 			session.close();
-		}		
+		}
+		
 	}
-	
 	@SuppressWarnings("unchecked")
-	public List<Funcionario>listar(){
+	public List<Item>listar(){
 		//criando a conexao
 				Session sessao = HibernateUtil.getSessionFactory().openSession();
-				System.out.println("criou a conexao");				
-				List<Funcionario>funcionarios=null;				
+				System.out.println("criou a conexao");
+				
+				List<Item>itens=null;
+				
 				try {
-					Query	consulta = 	sessao.getNamedQuery("Funcionario.listar");
-					funcionarios = consulta.list();
-					System.out.println("listado com sucesso");					
+					Query	consulta = 	sessao.getNamedQuery("Item.listar");
+					itens = consulta.list();
+					System.out.println("listado com sucesso");
+					
 				} catch (RuntimeException e) {						
 					System.out.println("erro ao salvar "+e.getMessage());
 					throw e;
@@ -46,18 +53,19 @@ public class FuncionarioDao {
 				finally {
 					sessao.close();
 				}
-				return funcionarios;
+				return itens;
 	}
-	
-	public Funcionario buscarPorCodigo(Long codigo_fun){
+	public Item buscarPorCodigo(Long codigo_item){
 		//criando a conexao
 				Session sessao = HibernateUtil.getSessionFactory().openSession();
-				System.out.println("criou a conexao");				
-				Funcionario funcionario = null;				
+				System.out.println("criou a conexao");
+				
+				Item item = null;
+				
 				try {
-					Query	consulta = 	sessao.getNamedQuery("Funcionario.buscarPorCodigo");
-					consulta.setLong("codigo_fun", codigo_fun);
-					funcionario = (Funcionario) consulta.uniqueResult();
+					Query	consulta = 	sessao.getNamedQuery("Item.buscarPorCodigo");
+					consulta.setLong("codigo_item", codigo_item);
+					item = (Item) consulta.uniqueResult();
 					System.out.println("buscado com sucesso");
 					
 				} catch (RuntimeException e) {						
@@ -67,17 +75,18 @@ public class FuncionarioDao {
 				finally {
 					sessao.close();
 				}
-				return funcionario;
+				return item;
 	}
-	
-	public void excluir(Funcionario funcionario) {
+	public void excluir(Item item) {
 		//criando a conexao
 		Session session = HibernateUtil.getSessionFactory().openSession();
-		System.out.println("criou a conexao");		
-		Transaction transaction = null;		
+		System.out.println("criou a conexao");
+		
+		Transaction transaction = null;
+		
 		try {
 			transaction = session.beginTransaction();//abrindo a transaçao			
-			session.delete(funcionario);
+			session.delete(item);
 			transaction.commit();//confirmando a transaçao
 			System.out.println("deletado com sucesso");
 			
@@ -86,70 +95,46 @@ public class FuncionarioDao {
 				transaction.rollback();				
 			}	
 			System.out.println("erro ao salvar "+e.getMessage());			
-		}
-		finally {
-			session.close();
-		}	
-	}
-	
-	public void excluir(Long codigo) {
-		//criando a conexao
-		Session session = HibernateUtil.getSessionFactory().openSession();
-		System.out.println("criou a conexao");		
-		Transaction transaction = null;		
-		try {
-			transaction = session.beginTransaction();//abrindo a transaçao			
-			Funcionario funcionario = buscarPorCodigo(codigo);
-			session.delete(funcionario);
-			transaction.commit();//confirmando a transaçao
-			System.out.println("deletado com sucesso");
-			
-		} catch (RuntimeException e) {
-			if(transaction != null) {
-				transaction.rollback();				
-			}	
-			System.out.println("erro ao salvar "+e.getMessage());			
-		}
-		finally {
-			session.close();
-		}	
-	}
-	
-	public void editar(Funcionario funcionario) {
-		//criando a conexao
-		Session session = HibernateUtil.getSessionFactory().openSession();
-		System.out.println("criou a conexao");		
-		Transaction transaction = null;		
-		try {
-			transaction = session.beginTransaction();//abrindo a transaçao			
-			Funcionario funcionarioEditar = buscarPorCodigo(funcionario.getCodigo_fun());
-			funcionarioEditar.setDescricao_fun(funcionario.getDescricao_fun());
-			funcionarioEditar.setNome_fun(funcionario.getNome_fun());
-			funcionarioEditar.setCpf_fun(funcionario.getCpf_fun());
-			funcionarioEditar.setFuncao_fun(funcionario.getFuncao_fun());
-			session.update(funcionarioEditar);
-			transaction.commit();//confirmando a transaçao
-			System.out.println("editado com sucesso");			
-		} catch (RuntimeException e) {
-			if(transaction != null) {
-				transaction.rollback();				
-			}	
-			System.out.println("erro ao editar "+e.getMessage());			
 		}
 		finally {
 			session.close();
 		}
 		
 	}
-	
-	public void editar1(Funcionario funcionario) {
+	public void excluir(Long codigo) {
 		//criando a conexao
 		Session session = HibernateUtil.getSessionFactory().openSession();
-		System.out.println("criou a conexao");	
-		Transaction transaction = null;	
+		System.out.println("criou a conexao");
+		
+		Transaction transaction = null;
+		
 		try {
 			transaction = session.beginTransaction();//abrindo a transaçao			
-			session.update(funcionario);
+			Item item = buscarPorCodigo(codigo);
+			session.delete(item);
+			transaction.commit();//confirmando a transaçao
+			System.out.println("deletado com sucesso");
+			
+		} catch (RuntimeException e) {
+			if(transaction != null) {
+				transaction.rollback();				
+			}	
+			System.out.println("erro ao salvar "+e.getMessage());			
+		}
+		finally {
+			session.close();
+		}
+	}
+	public void editar1(Item item) {
+		//criando a conexao
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		System.out.println("criou a conexao");
+		
+		Transaction transaction = null;
+		
+		try {
+			transaction = session.beginTransaction();//abrindo a transaçao			
+			session.update(item);
 			transaction.commit();//confirmando a transaçao
 			System.out.println("editado com sucesso");
 			
@@ -162,6 +147,6 @@ public class FuncionarioDao {
 		finally {
 			session.close();
 		}
+		
 	}
-	
 }

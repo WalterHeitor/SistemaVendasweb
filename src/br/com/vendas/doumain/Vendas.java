@@ -73,6 +73,12 @@ public class Vendas {
 	public void setFuncionario(Funcionario funcionario) {
 		this.funcionario = funcionario;
 	}
+
+	@Override
+	public String toString() {
+		return "Vendas [codigo_ven=" + codigo_ven + ", horario_ven=" + horario_ven + ", valor_total=" + valor_total
+				+ ", funcionario=" + funcionario + "]";
+	}
 	
 	
 }

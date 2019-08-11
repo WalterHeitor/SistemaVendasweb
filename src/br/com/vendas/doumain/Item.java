@@ -9,9 +9,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 @Entity
 @Table(name="tb_item")
+@NamedQueries(
+		{@NamedQuery(name="Item.listar", query="SELECT item FROM Item item"),
+		@NamedQuery(name="Item.buscarPorCodigo", query="SELECT item FROM Item item "
+				+ "WHERE item.codigo_item = :codigo_item")
+		})
 public class Item {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Id
@@ -72,6 +79,13 @@ public class Item {
 	public void setVenda(Vendas venda) {
 		this.venda = venda;
 	}
+
+	@Override
+	public String toString() {
+		return "Item [codigo_item=" + codigo_item + ", quant_item=" + quant_item + ", valor_parcial_item="
+				+ valor_parcial_item + ", venda=" + venda + ", produto=" + produto + "]";
+	}
+	
 	
 	
 }
