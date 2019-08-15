@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/Templates/modeloSistema.xhtml">
+	<ui:define name="metadata">
+		<f:metadata>
+		 	<f:viewParam name="foracao" value="#{MBFornecedores.acao}" />
+			<f:viewParam name="foracad" value="#{MBFornecedores.codigo}" />
+			<f:event listener="#{MBFornecedores.carregarCadastro}"
+				type="preRenderView" />
+		</f:metadata>
+	</ui:define>
+
+	<ui:define name="conteudo">
+		<h:form id="frnforcad">
+			<p:toolbar>
+				<f:facet name="left">
+					<h:outputText value="Fornecedores" />
+				</f:facet>
+			</p:toolbar>
+			<h:panelGrid columns="2" id="pnlforcad">
+				<p:outputLabel value="Código" />
+				<p:inputText maxlength="50" readonly="true"
+					value="#{MBFornecedores.fornecedor.codigo_for}" />
+				<p:outputLabel value="Descrição:" />
+				<p:inputText maxlength="50"
+					value="#{MBFornecedores.fornecedor.descricao_for}"
+					 readonly="#{MBFornecedores.acao == 'Excluir'}"/>
+			</h:panelGrid>
+			<h:panelGrid columns="5">
+				<p:button value="Novo" rendered="#{MBFornecedores.acao == 'Novo'}"/>
+				<p:commandButton value="Salvar"
+					actionListener="#{MBFornecedores.salvar}"
+					update=":msgGlobal :frnforcad:pnlforcad"
+					 />
+				<p:commandButton value="Excluir"
+					actionListener="#{MBFornecedores.excluir}" update=":msgGlobal"
+					rendered="#{MBFornecedores.acao == 'Excluir'}" />
+				<p:commandButton value="Editar"
+					actionListener="#{MBFornecedores.editar}" update=":msgGlobal"
+					rendered="#{MBFornecedores.acao == 'Editar'}" />
+				<p:button value="Voltar" outcome="/pages/FornecedorPesquisa.xhtml" />
+			</h:panelGrid>
+
+		</h:form>
+
+	</ui:define>
+
+
+
+
+</ui:composition>

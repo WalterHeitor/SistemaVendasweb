@@ -2,6 +2,7 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
   <display-name>SistemaVendasweb</display-name>
   <welcome-file-list>
+  	<welcome-file>pages/index.xhtml</welcome-file>
     <welcome-file>index.html</welcome-file>
     <welcome-file>index.htm</welcome-file>
     <welcome-file>index.jsp</welcome-file>
@@ -18,4 +19,13 @@
     <servlet-name>Faces Servlet</servlet-name>
     <url-pattern>/faces/*</url-pattern>
   </servlet-mapping>
+  <context-param>  
+    <param-name>primefaces.THEME</param-name>  
+    <param-value>cupertino</param-value>  
+ </context-param>
+ <listener>
+ <listener-class>
+ br.com.vendas.util.Contextlistener
+ </listener-class>
+ </listener>
 </web-app>

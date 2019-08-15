@@ -19,6 +19,7 @@ public class Fornecedor {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)	
 	private Long codigo_for;
+	
 	@Column(length=50)
 	private String descricao_for;
 	public Long getCodigo_for() {
