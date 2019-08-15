@@ -74,9 +74,9 @@ public class FornecedoresBean {
 		try {
 			acao = JSFUtil.getParam("foracao");
 			String valor = JSFUtil.getParam("forcad");
-			codigo = Long.parseLong(valor);
-			if (codigo != null) {
-				 
+			
+			if (valor != null) {
+				codigo = Long.parseLong(valor); 
 				FornecedoresDAO fdao = new FornecedoresDAO();
 				fornecedor = fdao.buscarPorCodigo(codigo);
 			} else {

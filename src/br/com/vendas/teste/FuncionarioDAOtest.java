@@ -10,7 +10,7 @@ public class FuncionarioDAOtest {
 	
 	public void salvar() {
 		Funcionario fun1 = new Funcionario();
-		fun1.setDescricao_fun("bonita");
+		fun1.setSenha_fun("bonita");
 		fun1.setNome_fun("nicolas");
 		fun1.setCpf_fun("12324562");
 		fun1.setFuncao_fun("gerente");
@@ -43,7 +43,7 @@ public class FuncionarioDAOtest {
 	public void editar() {
 		Funcionario f1=new Funcionario();
 		f1.setCodigo_fun(27L);
-		f1.setDescricao_fun("bonita");
+		f1.setSenha_fun("bonita");
 		f1.setNome_fun("maria Elisabet");
 		f1.setCpf_fun("12345678");
 		f1.setFuncao_fun("almaxarife");

@@ -123,7 +123,7 @@ public class FuncionarioDao {
 		try {
 			transaction = session.beginTransaction();//abrindo a transaçao			
 			Funcionario funcionarioEditar = buscarPorCodigo(funcionario.getCodigo_fun());
-			funcionarioEditar.setDescricao_fun(funcionario.getDescricao_fun());
+			funcionarioEditar.setSenha_fun(funcionario.getSenha_fun());
 			funcionarioEditar.setNome_fun(funcionario.getNome_fun());
 			funcionarioEditar.setCpf_fun(funcionario.getCpf_fun());
 			funcionarioEditar.setFuncao_fun(funcionario.getFuncao_fun());

@@ -8,6 +8,9 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+
+import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.br.CPF;
 @Entity
 @Table(name="tb_funcionario")
 @NamedQueries(
@@ -20,12 +23,16 @@ public class Funcionario {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Id
 	private Long codigo_fun;
-	@Column(length=50)
-	private String descricao_fun;
+	@NotEmpty(message="Digite nome:")
 	@Column(length=50)
 	private String nome_fun;
+	@NotEmpty(message="Digite senha:")
+	@Column(length=50)
+	private String senha_fun;
+	@CPF(message="Informe seu cpf")
 	@Column(length=50, unique=true)
 	private String cpf_fun;
+	@NotEmpty(message="Digite seu cargo:")
 	@Column(length=50)
 	private String funcao_fun;
 	public Long getCodigo_fun() {
@@ -34,11 +41,11 @@ public class Funcionario {
 	public void setCodigo_fun(Long codigo_fun) {
 		this.codigo_fun = codigo_fun;
 	}
-	public String getDescricao_fun() {
-		return descricao_fun;
+	public String getSenha_fun() {
+		return senha_fun;
 	}
-	public void setDescricao_fun(String descricao_fun) {
-		this.descricao_fun = descricao_fun;
+	public void setSenha_fun(String senha_fun) {
+		this.senha_fun = senha_fun;
 	}
 	public String getNome_fun() {
 		return nome_fun;
@@ -60,9 +67,10 @@ public class Funcionario {
 	}
 	@Override
 	public String toString() {
-		return "Funcionario [codigo_fun=" + codigo_fun + ", descricao_fun=" + descricao_fun + ", nome_fun=" + nome_fun
+		return "Funcionario [codigo_fun=" + codigo_fun + ", nome_fun=" + nome_fun + ", senha_fun=" + senha_fun
 				+ ", cpf_fun=" + cpf_fun + ", funcao_fun=" + funcao_fun + "]";
 	}
+	
 	
 	
 }

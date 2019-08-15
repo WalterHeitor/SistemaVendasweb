@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+
+import org.hibernate.validator.constraints.NotEmpty;
 @Entity
 @Table(name="tb_fornecedor")
 @NamedQueries(
@@ -19,7 +21,7 @@ public class Fornecedor {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)	
 	private Long codigo_for;
-	
+	@NotEmpty(message="Insira a descriçao")
 	@Column(length=50)
 	private String descricao_for;
 	public Long getCodigo_for() {

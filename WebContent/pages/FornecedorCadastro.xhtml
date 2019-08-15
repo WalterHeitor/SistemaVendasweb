@@ -8,7 +8,7 @@
 	template="/Templates/modeloSistema.xhtml">
 	<ui:define name="metadata">
 		<f:metadata>
-		 	<f:viewParam name="foracao" value="#{MBFornecedores.acao}" />
+			<f:viewParam name="foracao" value="#{MBFornecedores.acao}" />
 			<f:viewParam name="foracad" value="#{MBFornecedores.codigo}" />
 			<f:event listener="#{MBFornecedores.carregarCadastro}"
 				type="preRenderView" />
@@ -29,14 +29,15 @@
 				<p:outputLabel value="Descrição:" />
 				<p:inputText maxlength="50"
 					value="#{MBFornecedores.fornecedor.descricao_for}"
-					 readonly="#{MBFornecedores.acao == 'Excluir'}"/>
+					readonly="#{MBFornecedores.acao == 'Excluir'}">
+					<f:validateBean />
+				</p:inputText>
 			</h:panelGrid>
 			<h:panelGrid columns="5">
-				<p:button value="Novo" rendered="#{MBFornecedores.acao == 'Novo'}"/>
+				<p:button value="Novo" rendered="#{MBFornecedores.acao == 'Novo'}" />
 				<p:commandButton value="Salvar"
 					actionListener="#{MBFornecedores.salvar}"
-					update=":msgGlobal :frnforcad:pnlforcad"
-					 />
+					update=":msgGlobal :frnforcad:pnlforcad" />
 				<p:commandButton value="Excluir"
 					actionListener="#{MBFornecedores.excluir}" update=":msgGlobal"
 					rendered="#{MBFornecedores.acao == 'Excluir'}" />
