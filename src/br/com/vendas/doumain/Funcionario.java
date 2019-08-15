@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.br.CPF;
@@ -27,9 +28,10 @@ public class Funcionario {
 	@Column(length=50)
 	private String nome_fun;
 	@NotEmpty(message="Digite senha:")
+	@Size(min=5, max=8, message="sua senha deve conter 5 a 8 carateres")
 	@Column(length=50)
 	private String senha_fun;
-	@CPF(message="Informe seu cpf")
+	@CPF(message="Cpf Incorreto")
 	@Column(length=50, unique=true)
 	private String cpf_fun;
 	@NotEmpty(message="Digite seu cargo:")
