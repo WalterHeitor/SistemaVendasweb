@@ -6,33 +6,65 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	template="/Templates/modeloSistema.xhtml">
+	<ui:define name="metadata">
+		<f:metadata>
+			<f:viewParam name="funacao" value="#{MBFuncionario.acao}" />
+			<f:viewParam name="funacad" value="#{MBFuncionario.codigo}" />
+			<f:event listener="#{MBFuncionario.carregarCadastro}"
+				type="preRenderView" />
+		</f:metadata>
+	</ui:define>
+
 	<ui:define name="conteudo">
-		<h:form>
+		<h:form id="frnfuncad">
 			<p:toolbar>
 				<f:facet name="left">
 					<h:outputText value="Funcionarios" />
 				</f:facet>
 			</p:toolbar>
-			<h:panelGrid columns="2">
-				<p:outputLabel value="Código" />
-				<p:inputText maxlength="50" />
+			<h:panelGrid columns="2" id="pnlfuncad">
+				<p:outputLabel value="Código:" />
+				<p:inputText maxlength="50" readonly="true"
+					value="#{MBFuncionario.funcionario.codigo_fun}" />
 				<p:outputLabel value="Nome:" />
-				<p:inputText maxlength="50" />
-				<p:outputLabel value="CPF" />
-				<p:inputMask mask="999.999.999-99" maxlength="50" />
-				<p:outputLabel value="Senha" />
-				<p:password maxlength="8" />
-				<p:outputLabel value="Cargo:" />
-				<p:selectOneMenu>
-					<f:selectItem itemLabel="Selecione um Cargo" />
-					<f:selectItem itemLabel="Administrador" />
-					<f:selectItem itemLabel="Gerente" />
-					<f:selectItem itemLabel="Balconista" />
+				<p:inputText maxlength="50"
+					value="#{MBFuncionario.funcionario.nome_fun}"
+					readonly="#{MBFuncionario.acao == 'Excluir'}">
+					<f:validateBean />
+				</p:inputText>
+				<p:outputLabel value="CPF:"/>
+				<p:inputMask  mask="999.999.999-99" maxlength="50"
+					value="#{MBFuncionario.funcionario.cpf_fun}"
+					readonly="#{MBFuncionario.acao == 'Excluir'}">
+					<f:validateBean />
+				</p:inputMask>
+				<p:outputLabel value="Senha:"/>
+				<p:password maxlength="8"
+					value="#{MBFuncionario.funcionario.senha_fun}"
+					readonly="#{MBFuncionario.acao == 'Excluir'}" >
+					<f:validateBean />
+				</p:password>
+				<p:outputLabel value="Cargo:"/>
+				<p:selectOneMenu value="#{MBFuncionario.funcionario.funcao_fun}"
+				readonly="#{MBFuncionario.acao == 'Excluir'}">
+				<f:selectItem itemValue="" itemLabel="selecione o cargo"/>
+				<f:selectItem itemValue="Administrador" itemLabel="Administrador"/>
+				<f:selectItem itemValue="Gerente" itemLabel="Gerente"/>
+				<f:selectItem itemValue="Balconista" itemLabel="Balconista"/>
 				</p:selectOneMenu>
+				
 			</h:panelGrid>
-			<h:panelGrid columns="3">
-				<p:button value="Buscar" />
-				<p:button value="Novo" />
+			<h:panelGrid columns="5">
+				<p:button value="Novo" rendered="#{MBFuncionario.acao == 'Novo'}" />
+				<p:commandButton value="Salvar"
+					actionListener="#{MBFuncionario.salvar}"
+					update=":msgGlobal :frnfuncad:pnlfuncad" />
+				<p:commandButton value="Excluir"
+					actionListener="#{MBFuncionario.excluir}" update=":msgGlobal"
+					rendered="#{MBFuncionario.acao == 'Excluir'}" />
+				<p:commandButton value="Editar"
+					actionListener="#{MBFuncionario.editar}" update=":msgGlobal"
+					rendered="#{MBFuncionario.acao == 'Editar'}" />
 				<p:button value="Voltar" outcome="/pages/FuncionarioPesquisa.xhtml" />
 			</h:panelGrid>
 

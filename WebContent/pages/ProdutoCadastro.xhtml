@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="/Templates/modeloSistema.xhtml">
+	<ui:define name="metadata">
+		<f:metadata>
+			 <f:viewParam name="proacao" value="#{MBProduto.acao}" />
+			<f:viewParam name="proacad" value="#{MBProduto.codigo}" />
+			<f:event listener="#{MBProduto.carregarCadastro}"
+				type="preRenderView" />
+		</f:metadata>
+	</ui:define>
+
+	<ui:define name="conteudo">
+		<h:form id="frnprocad">
+			<p:toolbar>
+				<f:facet name="left">
+					<h:outputText value="Produtos" />
+				</f:facet>
+			</p:toolbar>
+			<h:panelGrid columns="2" id="pnlprocad">
+				<p:outputLabel value="Código" />
+				<p:inputText maxlength="50" readonly="true"
+					value="#{MBProduto.produto.codigo_pro}" />
+				<p:outputLabel value="Descrição:" />
+				<p:inputText maxlength="50"
+					value="#{MBProduto.produto.descricao_pro}"
+					readonly="#{MBProduto.acao == 'Excluir'}">
+					<f:validateBean />
+				</p:inputText>
+				<p:outputLabel value="Valor:" />
+				<p:inputText maxlength="50"
+					value="#{MBProduto.produto.preco_pro}"
+					readonly="#{MBProduto.acao == 'Excluir'}">
+					<f:validateBean />
+				</p:inputText>
+				<p:outputLabel value="Quantidade:" />
+				<p:inputText maxlength="50"
+					value="#{MBProduto.produto.quant_pro}"
+					readonly="#{MBProduto.acao == 'Excluir'}">
+					<f:validateBean />
+				</p:inputText>
+				
+				<p:outputLabel value="Fornecedor"/>
+				<p:selectOneMenu value="#{MBProduto.produto.fornecedor}"
+				readonly="#{MBProduto.acao == 'Excluir'}">
+				<f:selectItem itemValue="" itemLabel="Selecione um Fornecedor"/>
+				<f:selectItems value="#{MBProduto.listaFornecedor}" var="fornecedor" itemLabel="#{fornecedor.descricao_for}"
+				itemValue="#{fornecedor}"/>
+					
+				</p:selectOneMenu>
+			</h:panelGrid>
+			<h:panelGrid columns="5">
+				<p:button value="Novo" rendered="#{MBProduto.acao == 'Novo'}" />
+				<p:commandButton value="Salvar"
+					actionListener="#{MBProduto.salvar}"
+					update=":msgGlobal :frnprocad:pnlprocad" />
+				<p:commandButton value="Excluir"
+					actionListener="#{MBProduto.excluir}" update=":msgGlobal"
+					rendered="#{MBProduto.acao == 'Excluir'}" />
+				<p:commandButton value="Editar"
+					actionListener="#{MBProduto.editar}" update=":msgGlobal"
+					rendered="#{MBProduto.acao == 'Editar'}" />
+				<p:button value="Voltar" outcome="/pages/ProdutoPesquisa.xhtml" />
+			</h:panelGrid>
+
+		</h:form>
+
+	</ui:define>
+
+
+
+
+</ui:composition>

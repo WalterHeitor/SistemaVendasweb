@@ -6,37 +6,60 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	template="/Templates/modeloSistema.xhtml">
+	<ui:define name="metadata">
+		<f:metadata>
+			<f:event listener="#{MBFuncionario.prepararPesquisa}"
+				type="preRenderView" />
+		</f:metadata>
+	</ui:define>
+
 	<ui:define name="conteudo">
+
 		<h:form>
 			<p:toolbar>
 				<f:facet name="left">
 					<h:outputText value="Funcionarios" />
 				</f:facet>
 			</p:toolbar>
-			<h:panelGrid columns="7">
+			<h:panelGrid columns="4">
 				<p:outputLabel value="Nome" />
 				<p:inputText maxlength="50" />
-				<p:outputLabel value="CPF:" />
-				<p:inputMask mask="999.999.999-99" maxlength="50" />
-				<p:selectOneMenu>
-					<f:selectItem itemLabel="Selecione um Cargo" />
-					<f:selectItem itemLabel="Administrador" />
-					<f:selectItem itemLabel="Gerente" />
-					<f:selectItem itemLabel="Balconista" />
-				</p:selectOneMenu>
 				<p:button value="Buscar" />
-				<p:button value="Novo" outcome="/pages/FuncionarioCadastro.xhtml" />
+				<p:button value="Novo" outcome="/pages/FuncionarioCadastro.xhtml">
+				<f:param name="funacao" value="Novo"/>
+				</p:button>
 			</h:panelGrid>
-			<p:dataTable emptyMessage="Nenhum registro cadastrado!!!">
+			<p:dataTable emptyMessage="Nenhum registro cadastrado!!!"
+				value="#{MBFuncionario.itens}"
+				filteredValue="#{MBFuncionario.itensFiltrados}" var="funcionario"
+				rows="5" paginator="true">
 				<p:column headerText="Código">
+					<h:outputText value="#{funcionario.codigo_fun}" />
 				</p:column>
-				<p:column headerText="Nome">
+				<p:column headerText="Nome"
+					filterBy="#{funcionario.nome_fun}">
+					<h:outputText value="#{funcionario.nome_fun}" />
+					
 				</p:column>
-				<p:column headerText="CPF">
+				<p:column headerText="CPF"
+					filterBy="#{funcionario.cpf_fun}">
+					<h:outputText value="#{funcionario.cpf_fun}" />
 				</p:column>
-				<p:column headerText="Função">
+				<p:column headerText="Cargo"
+					filterBy="#{funcionario.funcao_fun}">
+					<h:outputText value="#{funcionario.funcao_fun}" />
 				</p:column>
 				<p:column headerText="Opções">
+					<p:button icon="ui-icon-pencil"
+						outcome="/pages/FuncionarioCadastro.xhtml">
+						<f:param name="funcad" value="#{funcionario.codigo_fun}"></f:param>
+						<f:param name="funacao" value="Editar"/>
+					</p:button>
+					<p:button icon="ui-icon-trash"
+						outcome="/pages/FuncionarioCadastro.xhtml">
+						<f:param name="funcad" value="#{funcionario.codigo_fun}"></f:param>
+						<f:param name="funacao" value="Excluir"/>
+					</p:button>
 				</p:column>
 			</p:dataTable>
 
@@ -44,6 +67,25 @@
 
 
 	</ui:define>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+
+	
 
 
 

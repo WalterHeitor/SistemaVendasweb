@@ -4,10 +4,7 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-
-import br.com.vendas.DAO.FornecedoresDAO;
 import br.com.vendas.DAO.FuncionarioDao;
-import br.com.vendas.doumain.Fornecedor;
 import br.com.vendas.doumain.Funcionario;
 import br.com.vendas.util.JSFUtil;
 
@@ -62,9 +59,9 @@ public class FuncionariosBean {
 		}
 		public void carregarCadastro() {
 			try {
-				acao = JSFUtil.getParam("foracao");
-				String valor = JSFUtil.getParam("forcad");
-				
+				acao = JSFUtil.getParam("funacao");
+				String valor = JSFUtil.getParam("funcad");
+		
 				if (valor != null) {
 					codigo = Long.parseLong(valor); 
 					FuncionarioDao fdao = new FuncionarioDao();
@@ -80,8 +77,9 @@ public class FuncionariosBean {
 		public void salvar() {
 			try {
 				FuncionarioDao fdao = new FuncionarioDao();
+				System.out.println(funcionario);
 				fdao.salvar(funcionario);
-				JSFUtil.addMensagemSucesso("Fornecedor salvo com Sucesso!!!");
+				JSFUtil.addMensagemSucesso("Funcionario salvo com Sucesso!!!");
 				funcionario = new Funcionario();
 			} catch (Exception e) {
 				JSFUtil.addMensagemErro("erro ao salvar: e.getMessage() " + e.getMessage());
@@ -92,7 +90,7 @@ public class FuncionariosBean {
 			try {
 				FuncionarioDao fdao = new FuncionarioDao();
 				fdao.excluir(funcionario);
-				JSFUtil.addMensagemSucesso("Fornecedor deletado com Sucesso!!!");
+				JSFUtil.addMensagemSucesso("Funcionario deletado com Sucesso!!!");
 			} catch (Exception e) {
 				JSFUtil.addMensagemErro("erro ao deletar: e.getMessage() " + e.getMessage());
 			}
@@ -102,7 +100,7 @@ public class FuncionariosBean {
 			try {
 				FuncionarioDao fdao = new FuncionarioDao();
 				fdao.editar1(funcionario);
-				JSFUtil.addMensagemSucesso("Fornecedor editado com Sucesso!!!");
+				JSFUtil.addMensagemSucesso("Funcionario editado com Sucesso!!!");
 			} catch (Exception e) {
 				JSFUtil.addMensagemErro("erro ao editar: e.getMessage() " + e.getMessage());
 			}

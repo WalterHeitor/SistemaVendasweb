@@ -12,6 +12,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Min;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name="tb_produto")
@@ -25,10 +29,11 @@ public class Produto {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Id
 	private Long codigo_pro;
-	
+	@NotEmpty(message="Digite a descrição:")
 	@Column(length=50)
 	private String descricao_pro;
-	
+	@NotEmpty(message="")
+	@Min(value= 0,message="O valor deve ser maior que zero")
 	@Column(scale=2, precision=9)
 	private BigDecimal preco_pro;
 	
