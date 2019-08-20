@@ -72,6 +72,29 @@ public class Funcionario {
 		return "Funcionario [codigo_fun=" + codigo_fun + ", nome_fun=" + nome_fun + ", senha_fun=" + senha_fun
 				+ ", cpf_fun=" + cpf_fun + ", funcao_fun=" + funcao_fun + "]";
 	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((codigo_fun == null) ? 0 : codigo_fun.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Funcionario other = (Funcionario) obj;
+		if (codigo_fun == null) {
+			if (other.codigo_fun != null)
+				return false;
+		} else if (!codigo_fun.equals(other.codigo_fun))
+			return false;
+		return true;
+	}
 	
 	
 	

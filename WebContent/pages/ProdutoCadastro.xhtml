@@ -8,7 +8,7 @@
 	template="/Templates/modeloSistema.xhtml">
 	<ui:define name="metadata">
 		<f:metadata>
-			 <f:viewParam name="proacao" value="#{MBProduto.acao}" />
+			<f:viewParam name="proacao" value="#{MBProduto.acao}" />
 			<f:viewParam name="proacad" value="#{MBProduto.codigo}" />
 			<f:event listener="#{MBProduto.carregarCadastro}"
 				type="preRenderView" />
@@ -33,38 +33,36 @@
 					<f:validateBean />
 				</p:inputText>
 				<p:outputLabel value="Valor:" />
-				<p:inputText maxlength="50"
-					value="#{MBProduto.produto.preco_pro}"
+				<p:inputText maxlength="50" value="#{MBProduto.produto.preco_pro}"
 					readonly="#{MBProduto.acao == 'Excluir'}">
 					<f:validateBean />
 				</p:inputText>
 				<p:outputLabel value="Quantidade:" />
-				<p:inputText maxlength="50"
-					value="#{MBProduto.produto.quant_pro}"
+				<p:inputText maxlength="50" value="#{MBProduto.produto.quant_pro}"
 					readonly="#{MBProduto.acao == 'Excluir'}">
 					<f:validateBean />
 				</p:inputText>
-				
-				<p:outputLabel value="Fornecedor"/>
+
+				<p:outputLabel value="Fornecedor" />
 				<p:selectOneMenu value="#{MBProduto.produto.fornecedor}"
-				readonly="#{MBProduto.acao == 'Excluir'}">
-				<f:selectItem itemValue="" itemLabel="Selecione um Fornecedor"/>
-				<f:selectItems value="#{MBProduto.listaFornecedor}" var="fornecedor" itemLabel="#{fornecedor.descricao_for}"
-				itemValue="#{fornecedor}"/>
-					
+					readonly="#{MBProduto.acao == 'Excluir'}"
+					converter="fornecedoresConverter">
+					<f:selectItem itemValue="" itemLabel="Selecione um Fornecedor" />
+					<f:selectItems value="#{MBProduto.listaFornecedor}"
+						var="fornecedor" itemLabel="#{fornecedor.descricao_for}"
+						itemValue="#{fornecedor}" />
+					<f:validateBean/>
 				</p:selectOneMenu>
 			</h:panelGrid>
 			<h:panelGrid columns="5">
 				<p:button value="Novo" rendered="#{MBProduto.acao == 'Novo'}" />
-				<p:commandButton value="Salvar"
-					actionListener="#{MBProduto.salvar}"
+				<p:commandButton value="Salvar" actionListener="#{MBProduto.salvar}"
 					update=":msgGlobal :frnprocad:pnlprocad" />
 				<p:commandButton value="Excluir"
 					actionListener="#{MBProduto.excluir}" update=":msgGlobal"
 					rendered="#{MBProduto.acao == 'Excluir'}" />
-				<p:commandButton value="Editar"
-					actionListener="#{MBProduto.editar}" update=":msgGlobal"
-					rendered="#{MBProduto.acao == 'Editar'}" />
+				<p:commandButton value="Editar" actionListener="#{MBProduto.editar}"
+					update=":msgGlobal" rendered="#{MBProduto.acao == 'Editar'}" />
 				<p:button value="Voltar" outcome="/pages/ProdutoPesquisa.xhtml" />
 			</h:panelGrid>
 

@@ -79,6 +79,31 @@ public class Vendas {
 		return "Vendas [codigo_ven=" + codigo_ven + ", horario_ven=" + horario_ven + ", valor_total=" + valor_total
 				+ ", funcionario=" + funcionario + "]";
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((codigo_ven == null) ? 0 : codigo_ven.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Vendas other = (Vendas) obj;
+		if (codigo_ven == null) {
+			if (other.codigo_ven != null)
+				return false;
+		} else if (!codigo_ven.equals(other.codigo_ven))
+			return false;
+		return true;
+	}
 	
 	
 }

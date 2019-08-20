@@ -40,6 +40,30 @@ public class Fornecedor {
 	public String toString() {
 		return "Fornecedor [codigo_for=" + codigo_for + ", descricao_for=" + descricao_for + "]";
 	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((codigo_for == null) ? 0 : codigo_for.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Fornecedor other = (Fornecedor) obj;
+		if (codigo_for == null) {
+			if (other.codigo_for != null)
+				return false;
+		} else if (!codigo_for.equals(other.codigo_for))
+			return false;
+		return true;
+	}
+	
 	
 	
 }

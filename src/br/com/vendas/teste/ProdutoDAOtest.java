@@ -13,19 +13,19 @@ import br.com.vendas.doumain.Fornecedor;
 import br.com.vendas.doumain.Produto;
 
 public class ProdutoDAOtest {
-	
+	@Test
 	public void salvar() {
 		FornecedoresDAO fdao = new FornecedoresDAO();
-		Fornecedor f1 = fdao.buscarPorCodigo(22L);
+		Fornecedor f1 = fdao.buscarPorCodigo(51L);
 		Produto p1 = new Produto();
-		p1.setDescricao_pro("macarrão");
+		p1.setDescricao_pro("sabão");
 		p1.setPreco_pro(new BigDecimal(1.47D));
 		p1.setQuant_pro(5L);
 		p1.setFornecedor(f1);
 		ProdutoDAO pdao = new ProdutoDAO();
 		pdao.salvar(p1);
 	}
-	@Test
+	
 	public void listar() {
 		ProdutoDAO pdao = new ProdutoDAO();
 		List<Produto>produtos = pdao.listar();

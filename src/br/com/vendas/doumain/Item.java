@@ -85,6 +85,31 @@ public class Item {
 		return "Item [codigo_item=" + codigo_item + ", quant_item=" + quant_item + ", valor_parcial_item="
 				+ valor_parcial_item + ", venda=" + venda + ", produto=" + produto + "]";
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((codigo_item == null) ? 0 : codigo_item.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Item other = (Item) obj;
+		if (codigo_item == null) {
+			if (other.codigo_item != null)
+				return false;
+		} else if (!codigo_item.equals(other.codigo_item))
+			return false;
+		return true;
+	}
 	
 	
 	

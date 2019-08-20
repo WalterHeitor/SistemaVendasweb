@@ -8,16 +8,16 @@ import org.hibernate.Transaction;
 import br.com.vendas.doumain.Vendas;
 import br.com.vendas.util.HibernateUtil;
 public class VendasDAO {
-	public void salvar(Vendas venda) {
+	public Long salvar(Vendas venda) {
 		//criando a conexao
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		System.out.println("criou a conexao");
 		
 		Transaction transaction = null;
-		
+		Long codigo = null;
 		try {
 			transaction = session.beginTransaction();//abrindo a transaçao			
-			session.save(venda);
+			codigo = (Long)session.save(venda);
 			transaction.commit();//confirmando a transaçao
 			System.out.println("salvo com sucesso");
 			
@@ -30,7 +30,7 @@ public class VendasDAO {
 		finally {
 			session.close();
 		}
-		
+		return codigo;
 	}
 	@SuppressWarnings("unchecked")
 	public List<Vendas>listar(){
