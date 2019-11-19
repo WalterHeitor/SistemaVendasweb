@@ -9,7 +9,7 @@ import br.com.vendas.util.HibernateUtil;
 public class GerarTabela {
 	@Test
 	public static void main(String[] args) {
-		//criarTabelas();
+		criarTabelas();
 		//salvar();
 	}
 	public static void salvar() {

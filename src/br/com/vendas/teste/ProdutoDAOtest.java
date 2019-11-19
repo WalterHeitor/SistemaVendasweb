@@ -5,8 +5,6 @@ import java.util.List;
 
 import org.junit.Test;
 
-import com.sun.org.apache.xerces.internal.impl.dv.xs.DecimalDV;
-
 import br.com.vendas.DAO.FornecedoresDAO;
 import br.com.vendas.DAO.ProdutoDAO;
 import br.com.vendas.doumain.Fornecedor;
